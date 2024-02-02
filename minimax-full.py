@@ -30,7 +30,7 @@ pygame.init()
 # Constants
 PLAYER, BOT = 'X', 'O'
 WIDTH, HEIGHT = 600, 600
-GRID_SIZE = 5
+GRID_SIZE = 3
 CELL_SIZE = WIDTH // GRID_SIZE
 
 # Colors
@@ -219,7 +219,7 @@ def find_best_move_with_depth_limit(b, max_depth):
 
     return best_move
 
-max_depth = 3  # Adjust this as needed. On my PC, 3x3 can handle 9, 4x4 can handle 5, 5x5 can handle 3
+max_depth = 9  # Adjust this as needed. On my PC, 3x3 can handle 9, 4x4 can handle 5, 5x5 can handle 3
 
 # Initialize gamestate and other variables
 player_turn = True  # True if it's the PLAYER's turn, False if it's the BOT's turn
