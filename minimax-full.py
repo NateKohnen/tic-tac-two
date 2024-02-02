@@ -1,3 +1,7 @@
+# This is the final version of my tic-tac-toe algorithm for now.
+# Minimax, a/b pruning, and transposition tables all seem to be working properly.
+# This iteration also incorporates some slight randomness, to keep the bot from playing the same thing every time.
+
 # DEFAULT MINIMAX SEARCH
 # First move: Plays at 0, 0, 549936 positions
 # Edge start: 63896 positions
@@ -26,7 +30,7 @@ pygame.init()
 # Constants
 PLAYER, BOT = 'X', 'O'
 WIDTH, HEIGHT = 600, 600
-GRID_SIZE = 3
+GRID_SIZE = 5
 CELL_SIZE = WIDTH // GRID_SIZE
 
 # Colors
@@ -37,11 +41,13 @@ BLACK = (0, 0, 0)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Tic Tac Toe")
 
+# Displays the empty game grid
 def draw_grid():
     for i in range(1, GRID_SIZE):
         pygame.draw.line(screen, WHITE, (i * CELL_SIZE, 0), (i * CELL_SIZE, HEIGHT), 15)
         pygame.draw.line(screen, WHITE, (0, i * CELL_SIZE), (WIDTH, i * CELL_SIZE), 15)
 
+# Marks down player and bot movements on the game board
 def draw_board(board):
     font = pygame.font.Font(None, 200)
     for i in range(GRID_SIZE):
@@ -57,8 +63,7 @@ def draw_board(board):
             text_rect = text.get_rect(center=(j * CELL_SIZE + CELL_SIZE // 2, i * CELL_SIZE + CELL_SIZE // 2))
             screen.blit(text, text_rect.topleft)
 
-# This function returns True if playable moves remain
-# It returns False otherwise
+# Returns True if playable moves remain
 def remaining_moves(b):
     for i in range(GRID_SIZE):
         for j in range(GRID_SIZE):
@@ -214,10 +219,10 @@ def find_best_move_with_depth_limit(b, max_depth):
 
     return best_move
 
-max_depth = 9  # Adjust this as needed
+max_depth = 3  # Adjust this as needed. On my PC, 3x3 can handle 9, 4x4 can handle 5, 5x5 can handle 3
 
 # Initialize gamestate and other variables
-player_turn = False  # True if it's the player's turn, False if it's the BOT's turn
+player_turn = True  # True if it's the PLAYER's turn, False if it's the BOT's turn
 board = [['_' for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
 
 # Begin counting the number of positions analyzed
